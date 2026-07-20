@@ -6,7 +6,7 @@ dotenv.config();
 const app = express();
 
 app.use(cors());
-app.use(express.json()); // Si uu u akhriyo xogta JSON-ka ah
+app.use(express.json()); 
 
 app.get('/', (req, res) => {
     res.send("Server-ka Suuqa Ardayda (S-marketplace) waa diyaar!");
