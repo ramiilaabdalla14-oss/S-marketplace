@@ -1,41 +1,27 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
-const mongoose = require('mongoose');
-
-// Route Imports
-const itemsRoute = require('./routes/ahmedabdirahman/items.route');
+const mongoose = require('mongoose'); // 1. Soo xangut Mongoose
+const AbdallaRouters = require('./Abdalla');
 
 dotenv.config();
-
 const app = express();
 
-// Middleware
 app.use(cors());
-app.use(express.json());
+app.use(express.json()); 
 
-// Database Connection
+// 2. Ku xingur MongoDB
 const MONGO_URI = process.env.MONGO_URI || 'mongodb://127.0.0.1:27017/s-marketplace';
 
-mongoose
-  .connect(MONGO_URI)
-  .then(() => console.log('MongoDB successfully connected.'))
-  .catch((err) => console.error('MongoDB connection error:', err));
+mongoose.connect(MONGO_URI)
+  .then(() => console.log('✅ MongoDB waa ku xirmay si guul leh!'))
+  .catch((err) => console.error('❌ MongoDB Connection Error:', err));
 
-// Base Route
+// Routes
+AbdallaRouters(app);
+
 app.get('/', (req, res) => {
-  res.send('Server-ka Suuqa Ardayda (S-marketplace) waa diyaar!');
-});
-
-// API Routes
-app.use('/api/items', itemsRoute);
-
-// Global 404 Handler
-app.use((req, res) => {
-  res.status(404).json({
-    success: false,
-    message: 'Route not found'
-  });
+    res.send("Server-ka Suuqa Ardayda (S-marketplace) waa diyaar!");
 });
 
 const PORT = process.env.PORT || 5000;
