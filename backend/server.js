@@ -38,7 +38,7 @@ const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose'); // 1. Soo jiido Mongoose
 const AbdallaRouters = require('./Abdalla');
-
+const NasteexaRouters = require('./Nasteexa');
 // Soo akhri xogta ku jirta faylka .env
 dotenv.config();
 
@@ -59,6 +59,7 @@ mongoose.connect(MONGO_URI)
 // --- ROUTES ---
 // Halkan waxaan ku yeereynaa faylka Abdalla.js si wadooyinka loo kiciyo
 AbdallaRouters(app);
+NasteexaRouters(app);
 
 // Waddada asalka ah (Root route) si aad u hubiso in server-ka shaqeynayo
 app.get('/', (req, res) => {
